@@ -7,9 +7,9 @@ https://www.raspberrypi.org/software/operating-systems/
 
 From here you can choose the version that you want to download. I am looking for the headless mode since I know I will connect only via SSH, so I only need Raspberry Pi OS Lite. Alternatively, if you know you will be using an interface, you can select one of the "with desktop" versions and follow the same process.
 
-<div text-align="center">
+<p align="center">
   <img src="../images/Download_OS.png" alt="Download image file" width="40%"/>
-</div>
+</p>
 
 
 This will most likely download the .img file to your `/Downloads` folder as a zip file called `2021-05-07-raspios-buster-armhf-lite.zip`.
@@ -38,7 +38,17 @@ The result should display something like this
    1:                        EFI EFI                     314.6 MB   disk0s1
    2:                 Apple_APFS Container disk1         500.0 GB   disk0s2
 
-/dev/disk1 (external, physical):
+/dev/disk1 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +500.0 GB   disk1
+                                 Physical Store disk0s2
+   1:                APFS Volume Macintosh HD            15.3 GB    disk1s1
+   2:                APFS Volume Macintosh HD - Data     64.4 GB    disk1s2
+   3:                APFS Volume Preboot                 584.3 MB   disk1s3
+   4:                APFS Volume Recovery                626.2 MB   disk1s4
+   5:                APFS Volume VM                      3.2 GB     disk1s5
+
+/dev/disk2 (external, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:     FDisk_partition_scheme                        *32.0 GB    disk1
    1:             Windows_FAT_32 boot                    268.4 MB   disk1s1
@@ -46,30 +56,32 @@ The result should display something like this
                     (free space)                         30.1 GB    -
 ```
 
-I know that my main hard drive for my computer is 500 GB, which corresponds to `/dev/disk0`.
+I know see that `/dev/disk0` is `(internal, physical)` and `500 GB`, which corresponds to my internal hard drive.
 
-I know that my SD card that I'm looking for is 32 GB, which corresponds to `/dev/disk1`.
+I know see that `/dev/disk1` is `(synthesized)` and `500 GB`, which corresponds to my internal hard drive.
 
-This means the device that I am looking for is the 32GB at `/dev/disk1`
+I know see that `/dev/disk2` is `(external, physical)` and `32 GB`, which corresponds to my SD card.
+
+This means the device I want to use is the external 32GB at `/dev/disk2`.
 
 ## 4. Umount the SD card
 
-Since I know I'm working with disk1, I will now need to unmount this disk
+Since I know I'm working with disk2, I will now need to unmount this disk
 ```
-diskutil unmoutDisk /dev/disk1
+diskutil unmoutDisk /dev/disk2
 ```
 
 It should then show a success message
 
 ```
-Unmount of all volumes on disk1 was successful
+Unmount of all volumes on disk2 was successful
 ```
 
 
 ## 5. Copy img file to SD card
 
 ```
-pv 2021-05-07-raspios-buster-armhf-lite.img | sudo dd bs=1m of=/dev/rdisk1
+pv 2021-05-07-raspios-buster-armhf-lite.img | sudo dd bs=1m of=/dev/rdisk2
 ```
 
 Let's break this command down.
@@ -80,19 +92,19 @@ The `dd` command is used to do the copying.
 
 The `bs=1m` is specifying that we want a block size of 1 MB
 
-The `of=/dev/rdisk1` is the location where we want to copy the file to.
+The `of=/dev/rdisk2` is the location where we want to copy the file to.
 
 When launching this command you should start to see a progress bar of the copy taking place.
 
 
 ```
- 1.05GiB 0:01:13 [15.1MiB/s] [========================================================>                                      ] 60% ETA 0:00:48
+ 1.05GiB 0:01:13 [15.1MiB/s] [===========================================>                              ] 60% ETA 0:00:48
 ```
 
 Once its finished copying you should see the final results.
 
 ```
-1.75GiB 0:02:01 [14.8MiB/s] [=============================================================================================>] 100%
+1.75GiB 0:02:01 [14.8MiB/s] [==========================================================================>] 100%
 0+28608 records in
 0+28608 records out
 1874853888 bytes transferred in 117.232097 secs (15992667 bytes/sec)
@@ -108,7 +120,7 @@ touch /Volumes/boot/ssh
 ## Unmount disk and remove SD card from computer
 Launch the same command as step 4 to unmount the disk one last time. 
 ```
-diskutil unmoutDisk /dev/disk1
+diskutil unmoutDisk /dev/disk2
 ```
 Now you can safely remove the SD card from your computer.
 
