@@ -8,7 +8,7 @@ https://www.raspberrypi.org/software/operating-systems/
 From here you can choose the version that you want to download. I am looking for the headless mode since I know I will connect only via SSH, so I only need Raspberry Pi OS Lite. Alternatively, if you know you will be using an interface, you can select one of the "with desktop" versions and follow the same process.
 
 <p align="center">
-  <img src="../images/Download_OS.png" alt="Download image file" width="40%"/>
+  <img src="../images/download_os.png" alt="Download image file" width="50%"/>
 </p>
 
 
