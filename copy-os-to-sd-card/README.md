@@ -56,11 +56,11 @@ The result should display something like this
                     (free space)                         30.1 GB    -
 ```
 
-I know see that `/dev/disk0` is `(internal, physical)` and `500 GB`, which corresponds to my internal hard drive.
+I see that `/dev/disk0` is `(internal, physical)` and `500 GB`, which corresponds to my internal hard drive.
 
-I know see that `/dev/disk1` is `(synthesized)` and `500 GB`, which corresponds to my internal hard drive.
+I see that `/dev/disk1` is `(synthesized)` and `500 GB`, which corresponds to the partitions of my internal hard drive.
 
-I know see that `/dev/disk2` is `(external, physical)` and `32 GB`, which corresponds to my SD card.
+I see that `/dev/disk2` is `(external, physical)` and `32 GB`, which corresponds to my SD card.
 
 This means the device I want to use is the external 32GB at `/dev/disk2`.
 
@@ -98,13 +98,13 @@ When launching this command you should start to see a progress bar of the copy t
 
 
 ```
- 1.05GiB 0:01:13 [15.1MiB/s] [===========================================>                              ] 60% ETA 0:00:48
+ 1.05GiB 0:01:13 [15.1MiB/s] [===========================================>                            ] 60% ETA 0:00:48
 ```
 
 Once its finished copying you should see the final results.
 
 ```
-1.75GiB 0:02:01 [14.8MiB/s] [==========================================================================>] 100%
+1.75GiB 0:02:01 [14.8MiB/s] [========================================================================>] 100%
 0+28608 records in
 0+28608 records out
 1874853888 bytes transferred in 117.232097 secs (15992667 bytes/sec)
