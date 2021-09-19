@@ -19,3 +19,5 @@ That said, working with Raspberry Pis, many times I end up doing the same thing 
 <br>
 
 [Copy Raspberry Pi OS to an SD card from the terminal](./copy-os-to-sd-card)
+
+[SSH to Raspbery Pi](./ssh-to-pi)

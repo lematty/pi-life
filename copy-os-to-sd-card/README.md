@@ -14,11 +14,16 @@ From here you can choose the version that you want to download. I am looking for
 
 This will most likely download the .img file to your `/Downloads` folder as a zip file called `2021-05-07-raspios-buster-armhf-lite.zip`.
 
-Unzip the image with the unzip command. This will place the `.img` file wherever you launch this command from.
+Navigate to the `/Downloads` folder where the image is located. 
+```
+cd ~/Downloads
+```
+Unzip the image
+```
+unzip 2021-05-07-raspios-buster-armhf-lite.zip
+```
+Warning: If not in the Downloads folder, unzipping will place the `.img` file wherever you launch this command from
 
-```
-unzip ~/Downloads/2021-05-07-raspios-buster-armhf-lite.zip
-```
 
 
 ## 2. Connect SD card to computer
@@ -110,14 +115,34 @@ Once its finished copying you should see the final results.
 1874853888 bytes transferred in 117.232097 secs (15992667 bytes/sec)
 ```
 
-## Bonus: Enable SSH on Raspberry Pi
+## Optional: Enable SSH on Raspberry Pi
 In order to connect to your pi via SSH, you'll simply need to create a file called ssh inside your `/boot` folder.
 
 ```
 touch /Volumes/boot/ssh
 ```
 
-## Unmount disk and remove SD card from computer
+## Optional: Setup Wifi (if not connecting by ethernet)
+To connect the pi to the wifi network, you'll need to create a `wpa_supplicant.conf` file in the boot directory.
+
+I personally use `vim`, but feel free to use whatever editor you'd like to create/edit the file.
+```
+vim /Volumes/boot/wpa_supplicant.conf
+```
+Then add the following configuration inside the file, save and exit.
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+
+network={
+    ssid="wifi-network"
+    psk="wifi-password"
+    key_mgmt=WPA-PSK
+}
+```
+
+## 6. Unmount disk and remove SD card from computer
 Launch the same command as step 4 to unmount the disk one last time. 
 ```
 diskutil unmoutDisk /dev/disk2
