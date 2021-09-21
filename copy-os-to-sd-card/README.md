@@ -73,7 +73,7 @@ This means the device I want to use is the external 32GB at `/dev/disk2`.
 
 Since I know I'm working with disk2, I will now need to unmount this disk
 ```
-diskutil unmoutDisk /dev/disk2
+diskutil unmountDisk /dev/disk2
 ```
 
 It should then show a success message
@@ -145,7 +145,7 @@ network={
 ## 6. Unmount disk and remove SD card from computer
 Launch the same command as step 4 to unmount the disk one last time. 
 ```
-diskutil unmoutDisk /dev/disk2
+diskutil unmountDisk /dev/disk2
 ```
 Now you can safely remove the SD card from your computer.
 
