@@ -12,7 +12,7 @@ From here you can choose the version that you want to download. I am looking for
 </p>
 
 
-This will most likely download the .img file to your `/Downloads` folder as a zip file called `2021-05-07-raspios-buster-armhf-lite.zip`.
+This will most likely download the .img file to your `/Downloads` folder as a zip file called `2021-10-30-raspios-bullseye-armhf-lite.zip`.
 
 Navigate to the `/Downloads` folder where the image is located. 
 ```
@@ -20,7 +20,7 @@ cd ~/Downloads
 ```
 Unzip the image
 ```
-unzip 2021-05-07-raspios-buster-armhf-lite.zip
+unzip 2021-10-30-raspios-bullseye-armhf-lite.zip
 ```
 Warning: If not in the Downloads folder, unzipping will place the `.img` file wherever you launch this command from
 
@@ -86,7 +86,7 @@ Unmount of all volumes on disk2 was successful
 ## 5. Copy img file to SD card
 
 ```
-pv 2021-05-07-raspios-buster-armhf-lite.img | sudo dd bs=1m of=/dev/rdisk2
+pv 2021-10-30-raspios-bullseye-armhf-lite.img | sudo dd bs=1m of=/dev/rdisk2
 ```
 
 Let's break this command down.

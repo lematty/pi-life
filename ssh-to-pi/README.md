@@ -95,4 +95,4 @@ We have found the IP address of the raspberry pi on the network.
 If this still hasn't worked and you are connecting via wifi, you may want to double check the `wpa_supplicant.conf` contains the correct SSID and password.
 
 ## Unable to SSH 
-Have you enabled SSH when flashing the SD card as described [here](../copy-os-to-sd-card)?
+Have you enabled SSH when flashing the SD card as described [here](../copy-os-to-sd-card#optional-enable-ssh-on-raspberry-pi)?
