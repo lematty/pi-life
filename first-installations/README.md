@@ -8,12 +8,12 @@ passwd
 
 ## Update and Upgrade packages
 ```
-sudo apt update && sudo apt full-upgrade
+sudo apt update && sudo apt full-upgrade -y
 ```
 
 ## Install vim
 ```
-sudo apt install vim
+sudo apt install vim -y
 ```
 
 ## Hide plain text wifi password

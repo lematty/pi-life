@@ -12,15 +12,15 @@ From here you can choose the version that you want to download. I am looking for
 </p>
 
 
-This will most likely download the .img file to your `/Downloads` folder as a zip file called `2021-10-30-raspios-bullseye-armhf-lite.zip`.
+This will most likely download the .img file to your `/Downloads` folder as a img.xz file called `2022-04-04-raspios-bullseye-arm64-lite.img.xz`.
 
 Navigate to the `/Downloads` folder where the image is located. 
 ```
 cd ~/Downloads
 ```
-Unzip the image
+Extract the image from this file
 ```
-unzip 2021-10-30-raspios-bullseye-armhf-lite.zip
+unxz 2022-04-04-raspios-bullseye-arm64-lite.img.xz
 ```
 Warning: If not in the Downloads folder, unzipping will place the `.img` file wherever you launch this command from
 
