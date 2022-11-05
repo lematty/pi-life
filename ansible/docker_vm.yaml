@@ -2,6 +2,7 @@
 - name: Install and setup the docker vm
   hosts: docker_vm
   become: true
+  remote_user: "{{ docker_vm_remote_user }}"
 
   vars_files:
     - vars/docker_vm_vars.yaml
@@ -11,3 +12,4 @@
     - install-vim
     - mount-nas
     - docker
+    - portainer
