@@ -1,0 +1,7 @@
+- name: Mount SMB share
+  ansible.posix.mount:
+    src: "//{{ nas_ip_address }}/configs/docker-volumes"
+    path: /mnt/docker-volumes
+    fstype: cifs
+    opts: "username={{ nas_share_username }},password={{ nas_share_password }}"
+    state: mounted

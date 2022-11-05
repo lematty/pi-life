@@ -1,0 +1,13 @@
+---
+- name: Install and setup the docker vm
+  hosts: docker_vm
+  become: true
+
+  vars_files:
+    - vars/docker_vm_vars.yaml
+
+  roles:
+    - apt-update
+    - install-vim
+    - mount-nas
+    - docker
