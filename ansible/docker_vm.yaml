@@ -13,3 +13,4 @@
     - mount-nas
     - docker
     - portainer
+    - watchtower
