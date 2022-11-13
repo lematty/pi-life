@@ -27,3 +27,8 @@
   user:
     name: "{{ ansible_user }}"
     group: docker
+
+- name: Make sure docker is running
+  service:
+    name: docker
+    state: started

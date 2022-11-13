@@ -1,6 +1,6 @@
 ---
 - name: Install and setup the docker vm
-  hosts: docker_vm
+  hosts: docker_vm_new
   become: true
   remote_user: "{{ ansible_username }}"
 
@@ -14,3 +14,4 @@
     - docker
     - portainer
     - watchtower
+    - duplicati

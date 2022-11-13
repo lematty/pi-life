@@ -1,4 +1,5 @@
 # Variables needed for this role:
+#   - ansible_become_password (to login as sudo for first run)
 #   - initial_hosts (defined in playbook)
 #   - initial_user
 #   - inital_user_new_password
