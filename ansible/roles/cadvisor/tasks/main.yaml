@@ -1,0 +1,15 @@
+- name: Install cAdvisor
+  become: false
+  docker_container:
+    name: cadvisor
+    image: gcr.io/cadvisor/cadvisor:latest
+    recreate: yes
+    published_ports:
+      - 9002:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    restart_policy: always
+    state: started

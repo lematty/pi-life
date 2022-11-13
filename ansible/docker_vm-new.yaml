@@ -17,3 +17,5 @@
     - duplicati
     - heimdall
     - uptime-kuma
+    - node-exporter
+    - cadvisor

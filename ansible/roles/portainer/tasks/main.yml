@@ -1,4 +1,4 @@
-- name: Install docker dependencies for portainer
+- name: Install Docker dependencies for Portainer
   become: true
   apt:
     name:

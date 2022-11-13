@@ -1,4 +1,4 @@
-- name: Install docker dependencies
+- name: Install Docker dependencies
   apt:
     name:
       - apt-transport-https

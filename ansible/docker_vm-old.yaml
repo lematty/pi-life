@@ -13,3 +13,4 @@
     - mount-nas
     - watchtower
     - uptime-kuma
+    - cadvisor

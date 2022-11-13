@@ -1,4 +1,4 @@
-- name: Install heimdall
+- name: Install Heimdall
   become: false
   docker_container:
     name: heimdall
