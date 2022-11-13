@@ -1,0 +1,19 @@
+---
+- name: Install and setup the docker vm
+  hosts: docker_vm_new
+  become: true
+  remote_user: "{{ ansible_username }}"
+
+  vars_files:
+    - vars/ansible_default_vars.yaml
+    - vars/docker_vm_vars.yaml
+
+  roles:
+    - apt-update
+    - mount-nas
+    - docker
+    - portainer
+    - watchtower
+    - duplicati
+    - heimdall
+    - uptime-kuma

@@ -21,7 +21,7 @@
     user: "{{ ansible_username }}"
     key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
 
-- name: Add sudoers file for ansible user
+- name: Add sudoers.d files for users
   file:
     path: "/etc/sudoers.d/{{ item }}"
     owner: root
@@ -31,7 +31,7 @@
     - "{{ ansible_username }}"
     - "{{ initial_user }}"
 
-- name: Allow passwordless sudo
+- name: Allow passwordless sudo for users
   lineinfile:
     dest: "/etc/sudoers.d/{{ item }}"
     line: "{{ item }}	ALL=(ALL) NOPASSWD: ALL"

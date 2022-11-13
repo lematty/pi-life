@@ -1,4 +1,4 @@
-- name: Install duplicati
+- name: Install Duplicati
   become: false
   docker_container:
     name: duplicati

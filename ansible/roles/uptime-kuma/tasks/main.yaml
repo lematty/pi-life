@@ -1,0 +1,12 @@
+- name: Install Uptime Kuma
+  become: true
+  docker_container:
+    name: uptime-kuma
+    image: louislam/uptime-kuma:1
+    recreate: yes
+    published_ports:
+      - 9001:3001
+    volumes:
+      - /var/lib/docker/volumes/uptime-kuma/data:/app/data
+    restart_policy: always
+    state: started

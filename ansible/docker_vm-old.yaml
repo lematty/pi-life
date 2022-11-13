@@ -1,6 +1,6 @@
 ---
 - name: Install and setup the docker vm
-  hosts: docker_vm_new
+  hosts: docker_vm_old
   become: true
   remote_user: "{{ ansible_username }}"
 
@@ -11,8 +11,5 @@
   roles:
     - apt-update
     - mount-nas
-    - docker
-    - portainer
     - watchtower
-    - duplicati
-    - heimdall
+    - uptime-kuma
