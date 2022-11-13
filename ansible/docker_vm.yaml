@@ -2,14 +2,14 @@
 - name: Install and setup the docker vm
   hosts: docker_vm
   become: true
-  remote_user: "{{ docker_vm_remote_user }}"
+  remote_user: "{{ ansible_username }}"
 
   vars_files:
+    - vars/ansible_default_vars.yaml
     - vars/docker_vm_vars.yaml
 
   roles:
     - apt-update
-    - install-vim
     - mount-nas
     - docker
     - portainer

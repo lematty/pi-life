@@ -1,0 +1,14 @@
+---
+# Modify the values inside secure-server/vars/main.yaml before running
+- name: Initial setup for new server
+  hosts: "{{ initial_hosts }}"
+  become: true
+  remote_user: "{{ initial_user }}"
+
+  vars_files:
+    - vars/ansible_default_vars.yaml
+
+  roles:
+    - apt-update
+    - install-vim
+    - secure-server
