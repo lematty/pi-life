@@ -2,7 +2,12 @@
   docker_container:
     name: watchtower
     image: containrrr/watchtower
-    command: "--schedule 0 1 * * *"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    env:
+      TZ: "America/New_York"
+      WATCHTOWER_MONITOR_ONLY: "true"
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_SCHEDULE: "0 0 4 * * 1"
+    recreate: yes
     restart_policy: always

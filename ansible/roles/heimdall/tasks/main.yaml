@@ -1,0 +1,17 @@
+- name: Install heimdall
+  become: false
+  docker_container:
+    name: heimdall
+    image: lscr.io/linuxserver/heimdall:latest
+    recreate: yes
+    published_ports:
+      - 9004:80
+      - 443:443
+    volumes:
+      - /var/lib/docker/volumes/heimdall/config:/config
+    restart_policy: always
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "America/New_York"
+    state: started
