@@ -1,0 +1,16 @@
+---
+- name: Install and setup tunnel-pi
+  hosts: tunnel_pi
+  become: true
+  remote_user: "{{ ansible_username }}"
+
+  vars_files:
+    - vars/ansible_default_vars.yaml
+
+  roles:
+    - apt-update
+    - docker
+    - portainer
+    - watchtower
+    - node-exporter
+    - pi-hole

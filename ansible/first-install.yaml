@@ -1,5 +1,5 @@
 ---
-# Modify the values inside secure-server/vars/main.yaml before running
+# Modify the values inside roles/secure-server/vars/main.yaml before running
 - name: Initial setup for new server
   hosts: "{{ initial_hosts }}"
   become: true

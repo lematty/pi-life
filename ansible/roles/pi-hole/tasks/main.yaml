@@ -1,0 +1,27 @@
+- name: Install Pi-Hole
+  become: true
+  docker_container:
+    name: pihole
+    image: pihole/pihole:latest
+    volumes:
+      - /var/lib/docker/volumes/pihole/etc-pihole:/etc/pihole
+      - /var/lib/docker/volumes/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    env:
+      TZ: "America/New_York"
+      WEBPASSWORD: "{{ pihole_admin_password }}"
+      WEBTHEME: default-dark
+    network_mode: host
+    capabilities:
+      - NET_ADMIN
+    recreate: yes
+    restart_policy: always
+
+- name: Install Unbound
+  docker_container:
+    name: unbound
+    image: mvance/unbound:latest # mvance/unbound-rpi:latest for raspberry pi
+    ports:
+      - 5335:53/udp
+      - 5335:53/tcp
+    recreate: yes
+    restart_policy: always

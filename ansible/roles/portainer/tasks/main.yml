@@ -1,3 +1,5 @@
+# Variables needed for this role:
+#   - portainer_encrypted_password (password for portainer)
 - name: Install Docker dependencies for Portainer
   become: true
   apt:
