@@ -1,0 +1,12 @@
+- name: Install Home Assistant
+  become: true
+  docker_container:
+    name: home-assistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - /var/lib/docker/volumes/home-assistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    recreate: yes
+    restart_policy: always
+    state: started

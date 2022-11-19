@@ -14,3 +14,4 @@
     - watchtower
     - uptime-kuma
     - cadvisor
+    - home-assistant
