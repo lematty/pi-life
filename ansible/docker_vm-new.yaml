@@ -15,7 +15,8 @@
     - portainer
     - watchtower
     - duplicati
-    - heimdall
-    - uptime-kuma
     - node-exporter
     - cadvisor
+    - heimdall
+    - uptime-kuma
+    - home-assistant

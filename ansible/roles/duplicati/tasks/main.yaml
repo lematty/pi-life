@@ -3,18 +3,16 @@
   docker_container:
     name: duplicati
     image: lscr.io/linuxserver/duplicati:latest
-    recreate: yes
     published_ports:
       - 8200:8200
     volumes:
-      - /var/lib/docker/volumes/duplicati/config:/config
-      - /var/lib/docker/volumes/duplicati/backups:/backups
-      - /var/lib/docker/volumes/duplicati/source:/source
-      - /var/lib/docker/volumes:/docker/volumes
-      - /mnt/docker-volumes:/docker-volumes
-    restart_policy: always
+      - "{{ docker_volumes_path_on_host }}/duplicati/config:/config"
+      - "{{ docker_volumes_path_on_host }}:/source"
+      - /mnt/docker-volumes/backups:/backups
     env:
       PUID: "0"
       PGID: "0"
       TZ: "America/New_York"
+    recreate: yes
+    restart_policy: always
     state: started

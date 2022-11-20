@@ -9,9 +9,13 @@
     - vars/docker_vm_vars.yaml
 
   roles:
-    - apt-update
-    - mount-nas
+    # - apt-update
+    # - mount-nas
+    # - docker
+    # - portainer
     - watchtower
-    - uptime-kuma
-    - cadvisor
-    - home-assistant
+    - duplicati
+    # - heimdall
+    # - uptime-kuma
+    # - cadvisor
+    # - home-assistant

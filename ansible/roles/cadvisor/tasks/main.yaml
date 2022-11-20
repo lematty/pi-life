@@ -1,6 +1,6 @@
 # Does not work on raspberry pi
 - name: Install cAdvisor
-  become: true # false might be ok
+  become: false # false might be ok
   docker_container:
     name: cadvisor
     image: gcr.io/cadvisor/cadvisor:latest
@@ -14,3 +14,4 @@
       - /var/lib/docker/:/var/lib/docker:ro
     restart_policy: always
     state: started
+  when: ansible_architecture != 'aarch64'

@@ -3,15 +3,15 @@
   docker_container:
     name: heimdall
     image: lscr.io/linuxserver/heimdall:latest
-    recreate: yes
     published_ports:
       - 9004:80
       - 443:443
     volumes:
-      - /var/lib/docker/volumes/heimdall/config:/config
-    restart_policy: always
+      - "{{ docker_volumes_path_on_host }}/heimdall/config:/config"
     env:
       PUID: "1000"
       PGID: "1000"
       TZ: "America/New_York"
+    recreate: yes
+    restart_policy: always
     state: started

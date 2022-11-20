@@ -1,27 +1,53 @@
+# Variables needed for this role:
+#   - pihole_admin_password (admin password for pihole UI login)
+#   - pihole_conf_path_on_host (path for pi-hole.conf file)
 - name: Install Pi-Hole
   become: true
   docker_container:
     name: pihole
     image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
     volumes:
-      - /var/lib/docker/volumes/pihole/etc-pihole:/etc/pihole
-      - /var/lib/docker/volumes/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+      - "{{ docker_volumes_path_on_host }}/pihole/etc-pihole:/etc/pihole"
+      - "{{ docker_volumes_path_on_host }}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
     env:
       TZ: "America/New_York"
       WEBPASSWORD: "{{ pihole_admin_password }}"
       WEBTHEME: default-dark
-    network_mode: host
-    capabilities:
-      - NET_ADMIN
     recreate: yes
     restart_policy: always
 
-- name: Install Unbound
+- name: Creates path for pi-hole.conf if not exists
+  file:
+    path: "{{ docker_volumes_path_on_host }}/unbound"
+    state: directory
+
+- name: Copy pi-hole.conf file to host for unbound
+  copy:
+    src: pi-hole.conf
+    dest: "{{ docker_volumes_path_on_host }}/unbound/pi-hole.conf"
+
+- name: Choose Unbound image based on system architecture
+  set_fact:
+    unbound_image: "{{ 'mvance/unbound-rpi:latest' if ansible_architecture == 'aarch64' else 'mvance/unbound:latest' }}"
+
+- name: Display chosen image for Unbound
+  debug:
+    msg:
+      - "System architecture: {{ ansible_architecture }}"
+      - "Unbound image:  {{ unbound_image }}"
+
+- name: Install Unbound for raspberry pi
   docker_container:
     name: unbound
-    image: mvance/unbound:latest # mvance/unbound-rpi:latest for raspberry pi
+    image: "{{ unbound_image }}"
     ports:
       - 5335:53/udp
       - 5335:53/tcp
+    volumes:
+      - "{{ docker_volumes_path_on_host }}/unbound/pi-hole.conf:/etc/unbound/unbound.conf.d/pi-hole.conf"
     recreate: yes
     restart_policy: always

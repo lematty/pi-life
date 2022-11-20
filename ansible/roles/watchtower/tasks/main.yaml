@@ -1,5 +1,5 @@
 - name: Install Watchtower
-  become: true
+  become: false
   docker_container:
     name: watchtower
     image: containrrr/watchtower

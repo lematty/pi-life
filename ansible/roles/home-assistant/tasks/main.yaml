@@ -4,9 +4,11 @@
     name: home-assistant
     image: ghcr.io/home-assistant/home-assistant:stable
     volumes:
-      - /var/lib/docker/volumes/home-assistant/config:/config
+      - "{{ docker_volumes_path_on_host }}/home-assistant/config:/config"
       - /etc/localtime:/etc/localtime:ro
     network_mode: host
+    env:
+      TZ: "America/New_York"
     recreate: yes
     restart_policy: always
     state: started
