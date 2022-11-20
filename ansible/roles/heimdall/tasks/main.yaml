@@ -1,5 +1,4 @@
 - name: Install Heimdall
-  become: false
   docker_container:
     name: heimdall
     image: lscr.io/linuxserver/heimdall:latest
@@ -13,5 +12,5 @@
       PGID: "1000"
       TZ: "America/New_York"
     recreate: yes
-    restart_policy: always
+    restart_policy: unless-stopped
     state: started

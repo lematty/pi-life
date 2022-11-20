@@ -1,0 +1,21 @@
+- name: Creates path for promtail volume if not exists
+  file:
+    path: "{{ docker_volumes_path_on_host }}/promtail"
+    state: directory
+
+- name: Copy promtail-config.yml file to host for promtail
+  copy:
+    src: promtail-config.yml
+    dest: "{{ docker_volumes_path_on_host }}/promtail/promtail-config.yml"
+
+- name: Install Promtail
+  docker_container:
+    name: promtail
+    image: grafana/promtail:latest
+    volumes:
+      - /var/log:/var/log
+      - "{{ docker_volumes_path_on_host }}/promtail:/etc/promtail"
+    command: -config.file=/etc/promtail/promtail-config.yml
+    restart_policy: unless-stopped
+    recreate: yes
+    state: started

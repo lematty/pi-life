@@ -25,5 +25,5 @@
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-    restart_policy: always
+    restart_policy: unless-stopped
     state: started

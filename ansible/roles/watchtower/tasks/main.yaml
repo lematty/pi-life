@@ -11,4 +11,4 @@
       WATCHTOWER_CLEANUP: "true"
       WATCHTOWER_SCHEDULE: "0 0 4 * * 1"
     recreate: yes
-    restart_policy: always
+    restart_policy: unless-stopped

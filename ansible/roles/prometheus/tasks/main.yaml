@@ -1,0 +1,21 @@
+- name: Creates path for prometheus volume if not exists
+  file:
+    path: "{{ docker_volumes_path_on_host }}/prometheus"
+    state: directory
+
+- name: Copy prometheus.yml file to host for prometheus
+  copy:
+    src: prometheus.yml
+    dest: "{{ docker_volumes_path_on_host }}/prometheus/prometheus.yml"
+
+- name: Install Prometheus
+  docker_container:
+    name: prometheus
+    image: prom/prometheus
+    published_ports:
+      - 9090:9090
+    volumes:
+      - "{{ docker_volumes_path_on_host }}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+    restart_policy: unless-stopped
+    recreate: yes
+    state: started

@@ -1,5 +1,4 @@
 - name: Install Home Assistant
-  become: true
   docker_container:
     name: home-assistant
     image: ghcr.io/home-assistant/home-assistant:stable
@@ -10,5 +9,5 @@
     env:
       TZ: "America/New_York"
     recreate: yes
-    restart_policy: always
+    restart_policy: unless-stopped
     state: started

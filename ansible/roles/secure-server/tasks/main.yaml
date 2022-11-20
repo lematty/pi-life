@@ -1,17 +1,12 @@
 # Variables needed for this role:
-#   - ansible_username (user that ansible create and use)
+#   ansible_default_vars.yaml
+#   - ansible_username (user that ansible will create and use)
 #   - ansible_become_password (to login as sudo for first run)
 #   - ansible_ssh_private_key (key ansible will use for first run)
+#   secure_server/vars/main.yaml
 #   - initial_hosts (which machine)
-#   - initial_user (user aside from ansible_username)
+#   - initial_user (user used for first run)
 #   - initial_user_new_password (reset initial_user's password to something secure)
-
-- name: Secure inital user password
-  user:
-    name: "{{ initial_user }}"
-    groups: sudo
-    append: true
-    password: "{{ initial_user_new_password | password_hash('sha512') }}"
 
 - name: Create ansible user and add to sudo group
   user:
@@ -19,7 +14,7 @@
     groups: sudo
     append: true
 
-- name: Add ansible user public key to authorized_keys
+- name: Add SSH key for ansible user
   authorized_key:
     user: "{{ ansible_username }}"
     key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
@@ -61,3 +56,10 @@
   service:
     name: sshd
     state: restarted
+
+- name: Secure inital user password
+  user:
+    name: "{{ initial_user }}"
+    groups: sudo
+    append: true
+    password: "{{ initial_user_new_password | password_hash('sha512') }}"

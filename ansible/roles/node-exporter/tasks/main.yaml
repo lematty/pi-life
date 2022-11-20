@@ -6,7 +6,7 @@
     recreate: yes
     volumes:
       - /:/host:ro,rslave
-    restart_policy: always
+    restart_policy: unless-stopped
     command: '--path.rootfs=/host'
     networks:
       - name: host

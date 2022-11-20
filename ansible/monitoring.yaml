@@ -1,0 +1,24 @@
+---
+- name: Install and setup monitoring
+  hosts: monitoring
+  become: true
+  remote_user: "{{ ansible_username }}"
+
+  vars_files:
+    - vars/ansible_default_vars.yaml
+
+  roles:
+    - apt-update
+    - mount-nas
+    - docker
+    - portainer
+    - promtail
+    - node-exporter
+    - cadvisor # skipped if on raspberry pi
+    - grafana
+    - loki
+    - prometheus
+    - uptime-kuma
+    - guacamole
+    - watchtower
+    - duplicati

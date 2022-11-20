@@ -1,0 +1,18 @@
+# - name: Create monitoring network
+#   docker_network:
+#     name: monitoring
+
+- name: Install Grafana
+  docker_container:
+    name: grafana
+    image: grafana/grafana:latest
+    user: "0:0"
+    published_ports:
+      - 9003:3000
+    volumes:
+      - "{{ docker_volumes_path_on_host }}/grafana:/var/lib/grafana"
+    # networks:
+    #   - monitoring
+    restart_policy: unless-stopped
+    recreate: yes
+    state: started

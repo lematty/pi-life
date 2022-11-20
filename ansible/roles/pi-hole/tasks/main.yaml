@@ -2,7 +2,6 @@
 #   - pihole_admin_password (admin password for pihole UI login)
 #   - pihole_conf_path_on_host (path for pi-hole.conf file)
 - name: Install Pi-Hole
-  become: true
   docker_container:
     name: pihole
     image: pihole/pihole:latest
@@ -18,7 +17,7 @@
       WEBPASSWORD: "{{ pihole_admin_password }}"
       WEBTHEME: default-dark
     recreate: yes
-    restart_policy: always
+    restart_policy: unless-stopped
 
 - name: Creates path for pi-hole.conf if not exists
   file:
@@ -40,7 +39,7 @@
       - "System architecture: {{ ansible_architecture }}"
       - "Unbound image:  {{ unbound_image }}"
 
-- name: Install Unbound for raspberry pi
+- name: Install Unbound
   docker_container:
     name: unbound
     image: "{{ unbound_image }}"
@@ -50,4 +49,4 @@
     volumes:
       - "{{ docker_volumes_path_on_host }}/unbound/pi-hole.conf:/etc/unbound/unbound.conf.d/pi-hole.conf"
     recreate: yes
-    restart_policy: always
+    restart_policy: unless-stopped
