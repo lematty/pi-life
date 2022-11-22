@@ -1,0 +1,11 @@
+- name: Install Guacamole
+  docker_container:
+    name: guacamole
+    image: oznu/guacamole
+    published_ports:
+      - 9005:8080
+    volumes:
+      - "{{ docker_volumes_host_path }}/guacamole/postgres:/config"
+    restart_policy: unless-stopped
+    recreate: yes
+    state: started

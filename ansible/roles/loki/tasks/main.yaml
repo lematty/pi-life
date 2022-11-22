@@ -1,16 +1,12 @@
-# - name: Create monitoring network
-#   docker_network:
-#     name: monitoring
-
 - name: Creates path for loki volume if not exists
   file:
-    path: "{{ docker_volumes_path_on_host }}/loki"
+    path: "{{ docker_volumes_host_path }}/loki"
     state: directory
 
 - name: Copy loki-config.yml file to host for loki
   copy:
     src: loki-config.yml
-    dest: "{{ docker_volumes_path_on_host }}/loki/loki-config.yml"
+    dest: "{{ docker_volumes_host_path }}/loki/loki-config.yml"
 
 - name: Install Loki
   docker_container:
@@ -19,9 +15,7 @@
     published_ports:
       - 9006:3100
     volumes:
-      - "{{ docker_volumes_path_on_host }}/loki:/etc/loki"
-    # networks:
-    #   - monitoring
+      - "{{ docker_volumes_host_path }}/loki:/etc/loki"
     command: -config.file=/etc/loki/loki-config.yml
     restart_policy: unless-stopped
     recreate: yes

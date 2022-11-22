@@ -7,6 +7,10 @@
   vars_files:
     - vars/ansible_default_vars.yaml
 
+  vars:
+    docker_volumes_host_path: "{{ docker_volumes_path_on_host }}/pihole"
+    docker_volumes_nas_path: "{{ docker_volumes_path_on_nas }}/pihole"
+
   roles:
     - apt-update
     - docker

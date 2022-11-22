@@ -1,0 +1,43 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: "http://{{ loki_address }}/loki/api/v1/push"
+
+# local machine logs
+
+scrape_configs:
+  - job_name: "{{ ansible_nodename }} - varlogs"
+    static_configs:
+    - targets:
+        - localhost
+      labels:
+        job: "{{ ansible_nodename }} - varlogs"
+        __path__: /var/log/*log
+
+  ## docker logs
+
+  - job_name: "{{ ansible_nodename }} - docker"
+    pipeline_stages:
+      - docker: {}
+    static_configs:
+      - labels:
+          job: "{{ ansible_nodename }} - docker"
+          __path__: /var/lib/docker/containers/*/*-json.log
+
+  # syslogs
+
+  - job_name: syslog
+    syslog:
+      listen_address: 0.0.0.0:1514 # make sure you also expose this port on the container
+      idle_timeout: 60s
+      label_structured_data: yes
+      labels:
+        job: "syslog"
+    relabel_configs:
+      - source_labels: ['__syslog_message_hostname']
+        target_label: 'host'

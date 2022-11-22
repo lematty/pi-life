@@ -5,7 +5,7 @@
     published_ports:
       - 9001:3001
     volumes:
-      - "{{ docker_volumes_path_on_host }}/uptime-kuma/data:/app/data"
+      - "{{ docker_volumes_host_path }}/uptime-kuma/data:/app/data"
     recreate: yes
     restart_policy: unless-stopped
     state: started

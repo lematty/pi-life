@@ -1,29 +1,17 @@
 # Variables needed for this role:
 #   - portainer_encrypted_password (password for portainer)
-- name: Install Docker dependencies for Portainer
-  become: true
-  apt:
-    name:
-      - python3-pip
-      - python3-setuptools
-
-- name: Install Docker Module for Python
-  become: true
-  pip:
-    name: docker
-
 - name: Install portainer
-  become: false
+  become: true # should be false, making true for docker vm
   docker_container:
     name: portainer
     image: portainer/portainer-ce
     command: --admin-password "{{ portainer_encrypted_password }}"
-    recreate: yes
     published_ports:
       - "8000:8000"
       - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+    recreate: yes
     restart_policy: unless-stopped
     state: started

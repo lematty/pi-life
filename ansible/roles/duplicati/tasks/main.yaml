@@ -5,9 +5,9 @@
     published_ports:
       - 8200:8200
     volumes:
-      - "{{ docker_volumes_path_on_host }}/duplicati/config:/config"
-      - "{{ docker_volumes_path_on_host }}:/source"
-      - /mnt/docker-volumes/backups:/backups
+      - "{{ docker_volumes_host_path }}/duplicati/config:/config"
+      - "{{ docker_volumes_host_path }}:/source"
+      - "{{ docker_volumes_nas_path }}/backups:/backups"
     env:
       PUID: "0"
       PGID: "0"

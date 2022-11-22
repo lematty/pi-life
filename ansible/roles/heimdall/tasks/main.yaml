@@ -6,7 +6,7 @@
       - 9004:80
       - 443:443
     volumes:
-      - "{{ docker_volumes_path_on_host }}/heimdall/config:/config"
+      - "{{ docker_volumes_host_path }}/heimdall/config:/config"
     env:
       PUID: "1000"
       PGID: "1000"

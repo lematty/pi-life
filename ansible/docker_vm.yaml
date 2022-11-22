@@ -1,6 +1,6 @@
 ---
 - name: Install and setup the docker vm
-  hosts: docker_vm_new
+  hosts: docker_vm
   become: true
   remote_user: "{{ ansible_username }}"
 
@@ -8,15 +8,19 @@
     - vars/ansible_default_vars.yaml
     - vars/docker_vm_vars.yaml
 
+  vars:
+    docker_volumes_host_path: "{{ docker_volumes_path_on_host }}/docker-vm"
+    docker_volumes_nas_path: "{{ docker_volumes_path_on_nas }}/docker-vm"
+
   roles:
     - apt-update
     - mount-nas
     - docker
     - portainer
-    - watchtower
-    - duplicati
+    - promtail
     - node-exporter
     - cadvisor
+    - watchtower
+    - duplicati
     - heimdall
-    - uptime-kuma
     - home-assistant

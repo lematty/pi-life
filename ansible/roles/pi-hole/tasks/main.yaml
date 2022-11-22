@@ -9,9 +9,12 @@
       - "53:53/tcp"
       - "53:53/udp"
       - "80:80/tcp"
+    dns_servers:
+      - 127.0.0.1
+      - 1.1.1.1
     volumes:
-      - "{{ docker_volumes_path_on_host }}/pihole/etc-pihole:/etc/pihole"
-      - "{{ docker_volumes_path_on_host }}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
+      - "{{ docker_volumes_host_path }}/pihole/etc-pihole:/etc/pihole"
+      - "{{ docker_volumes_host_path }}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
     env:
       TZ: "America/New_York"
       WEBPASSWORD: "{{ pihole_admin_password }}"
@@ -21,13 +24,13 @@
 
 - name: Creates path for pi-hole.conf if not exists
   file:
-    path: "{{ docker_volumes_path_on_host }}/unbound"
+    path: "{{ docker_volumes_host_path }}/unbound"
     state: directory
 
 - name: Copy pi-hole.conf file to host for unbound
   copy:
     src: pi-hole.conf
-    dest: "{{ docker_volumes_path_on_host }}/unbound/pi-hole.conf"
+    dest: "{{ docker_volumes_host_path }}/unbound/pi-hole.conf"
 
 - name: Choose Unbound image based on system architecture
   set_fact:
@@ -47,6 +50,6 @@
       - 5335:53/udp
       - 5335:53/tcp
     volumes:
-      - "{{ docker_volumes_path_on_host }}/unbound/pi-hole.conf:/etc/unbound/unbound.conf.d/pi-hole.conf"
+      - "{{ docker_volumes_host_path }}/unbound/pi-hole.conf:/etc/unbound/unbound.conf.d/pi-hole.conf"
     recreate: yes
     restart_policy: unless-stopped

@@ -3,12 +3,12 @@
   docker_container:
     name: node-exporter
     image: quay.io/prometheus/node-exporter:latest
-    recreate: yes
     volumes:
       - /:/host:ro,rslave
-    restart_policy: unless-stopped
     command: '--path.rootfs=/host'
     networks:
       - name: host
     pid_mode: host
+    recreate: yes
+    restart_policy: unless-stopped
     state: started
