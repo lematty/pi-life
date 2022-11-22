@@ -1,0 +1,15 @@
+- name: Install Loki plugin to get docker container logs
+  community.docker.docker_plugin.docker_plugin:
+    plugin_name: grafana/loki-docker-driver:latest
+    alias: loki
+    state: enable
+
+- name: daemon.json file from template
+  template:
+    src: daemon.j2
+    dest: /etc/docker/daemon.json
+
+- name: Restart Docker daemon
+  systemd:
+    name: docker
+    state: restarted

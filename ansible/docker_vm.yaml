@@ -16,6 +16,7 @@
     - apt-update
     - mount-nas
     - docker
+    - loki-plugin
     - portainer
     - promtail
     - node-exporter

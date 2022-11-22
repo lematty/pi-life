@@ -6,7 +6,7 @@ positions:
   filename: /tmp/positions.yaml
 
 clients:
-  - url: "http://{{ loki_address }}/loki/api/v1/push"
+  - url: "http://{{ ip_addresses['monitoring'] }}:{{ ports['loki'] }}/loki/api/v1/push"
 
 # local machine logs
 

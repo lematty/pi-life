@@ -1,0 +1,8 @@
+{
+    "debug" : true,
+    "log-driver": "loki",
+    "log-opts": {
+        "loki-url": "http://{{ ip_addresses['monitoring'] }}:{{ ports['loki'] }}/loki/api/v1/push",
+        "loki-batch-size": "100"
+    }
+}
