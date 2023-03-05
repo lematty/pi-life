@@ -3,7 +3,7 @@
 
 <br>
 
-## Documentation... a developer's savior & nightmare at the same time.
+## Documentation... a developer's savior & nightmare.
 <br>
 
 ### Raspberry Pis are awesome. The possibilities are endless. 
