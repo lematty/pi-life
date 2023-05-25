@@ -3,7 +3,7 @@
   become: false # false might be ok
   docker_container:
     name: cadvisor
-    image: gcr.io/cadvisor/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:v0.47.0
     published_ports:
       - 9002:8080
     volumes:
