@@ -1,23 +1,19 @@
-# Variables needed for this role:
-#   ansible_default_vars.yaml
-#   - ansible_username (user that ansible will create and use)
-#   - ansible_become_password (to login as sudo for first run)
-#   - ansible_ssh_private_key (key ansible will use for first run)
-#   secure_server/vars/main.yaml
-#   - initial_hosts (which machine)
-#   - initial_user (user used for first run)
-#   - initial_user_new_password (reset initial_user's password to something secure)
-
-- name: Create ansible user and add to sudo group
+- name: Create ansible user and add users to sudo group
   user:
     name: "{{ ansible_username }}"
     groups: sudo
     append: true
+  loop:
+    - "{{ ansible_username }}"
+    - "{{ initial_user }}"
 
-- name: Add SSH key for ansible user
+- name: Add SSH key for users
   authorized_key:
-    user: "{{ ansible_username }}"
-    key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
+    user: "{{ item.user }}"
+    key: "{{ lookup('file', item.key) }}"
+  loop:
+    - { user: "{{ ansible_username }}", key: "~/.ssh/ansible.pub" }
+    - { user: "{{ initial_user }}", key: "~/.ssh/{{ which_host }}.pub" }
 
 - name: Add sudoers.d files for users
   file:

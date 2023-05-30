@@ -1,7 +1,16 @@
 ---
-# Modify the values inside roles/secure-server/vars/main.yaml before running
+# Variables needed for this playbook:
+#   ansible_default_vars.yaml
+#   - ansible_host (which machine)
+#   - ansible_username (user that ansible will create and use)
+#   - ansible_become_password (root user password for first run)
+#   - ansible_ssh_private_key (if server already)
+#   roles/secure_server/vars/main.yaml
+#   - initial_user (user used for first run)
+#   - initial_user_ssh_key_name (name of ssh key)
+#   - initial_user_new_password (reset initial_user's password to something secure)
 - name: Initial setup for new server
-  hosts: "{{ initial_hosts }}"
+  hosts: "{{ which_host }}"
   become: true
   remote_user: "{{ initial_user }}"
 
@@ -10,5 +19,5 @@
 
   roles:
     - apt-update
-    - install-vim
+    - vim
     - secure-server

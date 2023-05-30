@@ -3,7 +3,7 @@
     path: "{{ docker_volumes_host_path }}/promtail"
     state: directory
 
-- name: Creaet promtail-config.yml file from template
+- name: Create promtail-config.yml file from template
   template:
     src: promtail-config.j2
     dest: "{{ docker_volumes_host_path }}/promtail/promtail-config.yml"

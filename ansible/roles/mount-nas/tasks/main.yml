@@ -5,3 +5,4 @@
     fstype: cifs
     opts: "username={{ nas_share_username }},password={{ nas_share_password }}"
     state: mounted
+  no_log: true
