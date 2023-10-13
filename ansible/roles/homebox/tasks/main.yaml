@@ -1,0 +1,16 @@
+- name: Install Homebox
+  docker_container:
+    name: homebox
+    image: ghcr.io/hay-kot/homebox:latest
+    published_ports:
+      - 9008:7745
+    volumes:
+      - "{{ docker_volumes_host_path }}/homebox/data:/data/"
+    env:
+      HBOX_LOG_LEVEL: "info"
+      HBOX_LOG_FORMAT: "text"
+      HBOX_WEB_MAX_UPLOAD_SIZE: "10"
+      HBOX_OPTIONS_ALLOW_REGISTRATION: "false" # set to false after login creation
+    recreate: yes
+    restart_policy: unless-stopped
+    state: started

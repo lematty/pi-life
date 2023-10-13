@@ -1,0 +1,13 @@
+---
+- name: Install and setup omv
+  hosts: omv_pi
+  become: true
+  remote_user: "{{ ansible_username }}"
+
+  vars_files:
+    - vars/ansible_default_vars.yaml
+
+  roles:
+    - apt-update
+    - promtail
+    - node-exporter

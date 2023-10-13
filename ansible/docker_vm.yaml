@@ -17,11 +17,12 @@
     - mount-nas
     - docker
     - loki-plugin
-    - portainer
-    - promtail
-    - node-exporter
-    - cadvisor
-    - watchtower
-    - duplicati
-    - heimdall
-    - home-assistant
+    # - portainer # will reset password to default
+    # - promtail
+    # - node-exporter
+    # - cadvisor
+    # # - watchtower
+    # - duplicati
+    # - heimdall
+    # - home-assistant
+    - homebox

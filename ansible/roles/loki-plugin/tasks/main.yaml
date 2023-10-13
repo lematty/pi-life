@@ -3,13 +3,16 @@
     plugin_name: grafana/loki-docker-driver:latest
     alias: loki
     state: enable
+  register: loki_plugin_result
 
 - name: daemon.json file from template
   template:
     src: daemon.j2
     dest: /etc/docker/daemon.json
+  register: template_result
 
 - name: Restart Docker daemon
   systemd:
     name: docker
     state: restarted
+  when: loki_plugin_result.changed or template_result.changed

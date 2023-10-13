@@ -46,6 +46,10 @@ Go to ansible root directory
 ```bash
 ansible-playbook playbook_name.yaml -vvvv
 ```
+
+If ansible user already exists, uncomment `ansible_ssh_private_key_file` in ansible_default_vars.yaml
+
+
 ---
 
 ## Ansible file encryption
