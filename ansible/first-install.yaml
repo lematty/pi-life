@@ -1,12 +1,13 @@
 ---
 # Variables needed for this playbook:
 #   ansible_default_vars.yaml
-#   - ansible_host (which machine)
+#   - ansible_host (which machine) Might be able to remove (replaced by which_host)
 #   - ansible_username (user that ansible will create and use)
 #   - ansible_become_password (root user password for first run)
-#   - ansible_ssh_private_key (if server already)
+#   - ansible_ssh_private_key (if server already as ansible SSH key)
 #   roles/secure_server/vars/main.yaml
 #   - initial_user (user used for first run)
+#   vars/<machine>_vars.yaml
 #   - initial_user_ssh_key_name (name of ssh key)
 #   - initial_user_new_password (reset initial_user's password to something secure)
 - name: Initial setup for new server
@@ -16,6 +17,8 @@
 
   vars_files:
     - vars/ansible_default_vars.yaml
+    # Replace with vars file of machine
+    - vars/<machine>_vars.yaml
 
   roles:
     - apt-update

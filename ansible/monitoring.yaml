@@ -13,17 +13,18 @@
 
   roles:
     - apt-update
-    - mount-nas
-    - docker
-    - loki-plugin
-    - portainer
-    - promtail
-    - node-exporter
-    - cadvisor # skipped if on raspberry pi
-    - grafana
-    - loki
-    - prometheus
-    - uptime-kuma
-    - guacamole
-    - watchtower
-    - duplicati
+    # - disable-secure-server
+    # - mount-nas
+    # - docker
+    # - loki-plugin
+    # - portainer
+    # - promtail
+    # - node-exporter
+    # - cadvisor # skipped if on raspberry pi
+    # - grafana
+    # - loki
+    # - prometheus
+    # - uptime-kuma
+    # - guacamole
+    # - watchtower
+    # - duplicati
