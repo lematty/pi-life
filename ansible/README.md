@@ -42,9 +42,14 @@
 ## How to run playbook
 Go to ansible root directory
 
+### Run playbook in `dry run`
+```bash
+ansible-playbook <playbook_name>.yaml -vvvv --check
+```
+
 ### Run playbook
 ```bash
-ansible-playbook playbook_name.yaml -vvvv
+ansible-playbook <playbook_name>.yaml -vvvv
 ```
 
 If ansible user already exists, uncomment `ansible_ssh_private_key_file` in ansible_default_vars.yaml

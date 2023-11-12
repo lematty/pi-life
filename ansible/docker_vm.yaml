@@ -14,9 +14,10 @@
 
   roles:
     - apt-update
-    - mount-nas
-    - docker
-    - loki-plugin
+    # - disable-secure-server
+    # - mount-nas
+    # - docker
+    # - loki-plugin
     # - portainer # will reset password to default
     # - promtail
     # - node-exporter
@@ -25,4 +26,4 @@
     # - duplicati
     # - heimdall
     # - home-assistant
-    - homebox
+    # - homebox
